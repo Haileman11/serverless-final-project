@@ -4,7 +4,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import * as middy from 'middy'
 import { cors, httpErrorHandler } from 'middy/middlewares'
 
-import { createAttachmentPresignedUrl } from '../../dataLayer/attachmentUtils'
+import { createAttachmentPresignedUrl } from '../../fileStorage/attachmentUtils'
 import { getUserId } from '../utils'
 import { updateTodoAttachment } from '../../businessLogic/todos'
 
