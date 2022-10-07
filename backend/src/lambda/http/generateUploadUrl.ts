@@ -4,9 +4,9 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import * as middy from 'middy'
 import { cors, httpErrorHandler } from 'middy/middlewares'
 
-import { createAttachmentPresignedUrl } from '../../helpers/attachmentUtils'
+import { createAttachmentPresignedUrl } from '../../dataLayer/attachmentUtils'
 import { getUserId } from '../utils'
-import { updateTodoAttachment } from '../../helpers/todos'
+import { updateTodoAttachment } from '../../businessLogic/todos'
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

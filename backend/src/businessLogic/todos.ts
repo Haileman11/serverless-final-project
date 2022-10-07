@@ -1,12 +1,12 @@
-import { TodosAccess } from './todosAccess'
-import * as AttachmentUtils from './attachmentUtils';
+import { TodosAccess } from '../dataLayer/todosAccess'
+import * as AttachmentUtils from '../dataLayer/attachmentUtils';
 // import { TodoItem } from '../models/TodoItem'
 import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 // import { createLogger } from '../utils/logger'
 import * as uuid from 'uuid'
 import { TodoItem } from '../models/TodoItem';
-// import * as createError from 'http-errors'
+import * as createError from 'http-errors'
 // import { getUserId } from '../lambda/utils'
 const todosAccess = new TodosAccess()
 
@@ -25,6 +25,10 @@ export const createTodo = async (createTodoRequest: CreateTodoRequest,userId:str
     const todoId = uuid.v4()    
     const createdAt = new Date().toISOString()
     const done = false
+    if (!createTodoRequest.name ||  createTodoRequest.name==='') {
+        const error=createError(422, 'Invalid name.') as createError.HttpError
+        throw error
+    }
     // const attachmentUrl = `https://${process.env.ATTACHMENT_S3_BUCKET}.s3.amazon.com/${todoId}`
 
     const newTodo={todoId,userId,createdAt,done,...createTodoRequest}
